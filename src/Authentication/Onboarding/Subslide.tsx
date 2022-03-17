@@ -1,18 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Animated from "react-native-reanimated";
+
+import Button from "../../components/Button";
 
 interface SubslideProps {
   subtitle: string;
   description: string;
   last?: boolean;
+  onPress: () => void;
 }
 
-const Subslide = ({ subtitle, description, last }: SubslideProps) => {
+const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>{subtitle}</Text>
       <Text style={styles.description}>{description}</Text>
+      <Button
+        label={last ? "Let's get Started" : "Next"}
+        variant={last ? "primary" : "default"}
+        {...{ onPress }}
+      />
     </View>
   );
 };
@@ -39,5 +46,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: "#0C0D34",
     textAlign: "center",
+    marginBottom: 40,
   },
 });
