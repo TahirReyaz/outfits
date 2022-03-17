@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { multiply } from "react-native-reanimated";
 import {
   useValue,
   onScrollEvent,
@@ -8,14 +8,39 @@ import {
 } from "react-native-redash/lib/module/v1";
 
 import Slide, { SLIDER_HEIGHT } from "./Slide";
+import Subslide from "./Subslide";
 
+const BORDER_RADIUS = 75;
 const { width } = Dimensions.get("window");
 
 const slides = [
-  { label: "Relaxed", color: "#BFEAF5" },
-  { label: "Playful", color: "#BEECC4" },
-  { label: "Excentric", color: "#FFE4D9" },
-  { label: "Funky", color: "#FFDDDD" },
+  {
+    title: "Relaxed",
+    subtitle: "Find Your Outfits",
+    description:
+      "Confused about your outfit? Don't worry! Find the best outfits here!",
+    color: "#BFEAF5",
+  },
+  {
+    title: "Playful",
+    subtitle: "Hear it First, Wear it First",
+    description:
+      "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
+    color: "#BEECC4",
+  },
+  {
+    title: "Excentric",
+    subtitle: "Your Style, Your Way",
+    description:
+      "Create your individual and unique style and look amazing everyday",
+    color: "#FFE4D9",
+  },
+  {
+    title: "Funky",
+    subtitle: "Look Good, Feel Good",
+    description: "Discover the trends in fashion and explore your personality",
+    color: "#FFDDDD",
+  },
 ];
 
 const Onboarding = () => {
@@ -38,8 +63,8 @@ const Onboarding = () => {
           scrollEventThrottle={1}
           {...{ onScroll }}
         >
-          {slides.map(({ label }, index) => (
-            <Slide key={index} right={!!(index % 2)} {...{ label }} />
+          {slides.map(({ title }, index) => (
+            <Slide key={index} right={!!(index % 2)} {...{ title }} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
@@ -47,9 +72,24 @@ const Onboarding = () => {
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, backgroundColor }}
         />
-        <View
-          style={{ flex: 1, backgroundColor: "white", borderTopLeftRadius: 75 }}
-        />
+        <Animated.View
+          style={[
+            styles.footerContent,
+            {
+              width: width * slides.length,
+              flex: 1,
+              transform: [{ translateX: multiply(x, -1) }],
+            },
+          ]}
+        >
+          {slides.map(({ subtitle, description }, index) => (
+            <Subslide
+              key={index}
+              last={index === slides.length - 1}
+              {...{ subtitle, description }}
+            />
+          ))}
+        </Animated.View>
       </View>
     </View>
   );
@@ -64,9 +104,15 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDER_HEIGHT,
-    borderBottomRightRadius: 75,
+    borderBottomRightRadius: BORDER_RADIUS,
   },
   footer: {
     flex: 1,
+  },
+  footerContent: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderTopLeftRadius: BORDER_RADIUS,
   },
 });
