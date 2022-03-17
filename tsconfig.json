@@ -21,5 +21,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "extends": "expo/tsconfig.base",
+    "include": [
+      "node_modules/react-native-redash/lib/typescript/v1/index.d.ts"
+    ]
 }
