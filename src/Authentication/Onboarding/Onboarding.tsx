@@ -7,10 +7,9 @@ import {
 } from "react-native-redash/lib/module/v1";
 import Dot from "./Dot";
 
-import Slide, { SLIDER_HEIGHT } from "./Slide";
+import Slide, { SLIDER_HEIGHT, BORDER_RADIUS } from "./Slide";
 import Subslide from "./Subslide";
 
-const BORDER_RADIUS = 75;
 const { width } = Dimensions.get("window");
 
 const slides = [
@@ -20,6 +19,7 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find the best outfits here!",
     color: "#BFEAF5",
+    img: require("../../../assets/1.png"),
   },
   {
     title: "Playful",
@@ -27,6 +27,7 @@ const slides = [
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
     color: "#BEECC4",
+    img: require("../../../assets/2.png"),
   },
   {
     title: "Excentric",
@@ -34,12 +35,14 @@ const slides = [
     description:
       "Create your individual and unique style and look amazing everyday",
     color: "#FFE4D9",
+    img: require("../../../assets/3.png"),
   },
   {
     title: "Funky",
     subtitle: "Look Good, Feel Good",
     description: "Discover the trends in fashion and explore your personality",
     color: "#FFDDDD",
+    img: require("../../../assets/4.png"),
   },
 ];
 
@@ -62,8 +65,8 @@ const Onboarding = () => {
           bounces={false}
           {...scrollHandler}
         >
-          {slides.map(({ title }, index) => (
-            <Slide key={index} right={!!(index % 2)} {...{ title }} />
+          {slides.map(({ title, img }, index) => (
+            <Slide key={index} right={!!(index % 2)} {...{ title, img }} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
