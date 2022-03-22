@@ -1,5 +1,7 @@
-import { Dimensions, StyleSheet, View, Text, Image } from "react-native";
+import { Dimensions, StyleSheet, View, Image } from "react-native";
 import React from "react";
+
+import { Text } from "../../components";
 
 const { width, height } = Dimensions.get("window");
 export const SLIDER_HEIGHT = height * 0.61;
@@ -24,7 +26,7 @@ const Slide = ({ title, right, img }: SlideProps) => {
         <Image source={img} style={styles.img} />
       </View>
       <View style={[styles.titleContainer, { transform }]}>
-        <Text style={styles.title}>{title}</Text>
+        <Text variant="hero">{title}</Text>
       </View>
     </View>
   );
@@ -39,13 +41,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     height: 100,
     justifyContent: "center",
-  },
-  title: {
-    fontSize: 80,
-    fontFamily: "SFProText-Bold",
-    color: "white",
-    textAlign: "center",
-    lineHeight: 80,
   },
   underlay: {
     ...StyleSheet.absoluteFillObject,
