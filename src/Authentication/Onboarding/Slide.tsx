@@ -1,11 +1,10 @@
 import { Dimensions, StyleSheet, View, Image } from "react-native";
 import React from "react";
 
-import { Text } from "../../components";
+import { Text, theme } from "../../components";
 
 const { width, height } = Dimensions.get("window");
 export const SLIDER_HEIGHT = height * 0.61;
-export const BORDER_RADIUS = 75;
 
 interface SlideProps {
   title: string;
@@ -42,6 +41,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     width: undefined,
     height: undefined,
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
   },
 });

@@ -12,8 +12,9 @@ import {
 } from "react-native-redash/lib/module/v1";
 import Dot from "./Dot";
 
-import Slide, { SLIDER_HEIGHT, BORDER_RADIUS } from "./Slide";
+import Slide, { SLIDER_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
+import { theme } from "../../components";
 
 const { width } = Dimensions.get("window");
 
@@ -94,8 +95,9 @@ const Onboarding = () => {
               <Image
                 source={img.src}
                 style={{
-                  width: width - BORDER_RADIUS,
-                  height: ((width - BORDER_RADIUS) * img.height) / img.width,
+                  width: width - theme.borderRadii.xl,
+                  height:
+                    ((width - theme.borderRadii.xl) * img.height) / img.width,
                 }}
               />
             </Animated.View>
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDER_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
   },
   footer: {
     flex: 1,
@@ -173,11 +175,11 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1,
     backgroundColor: "white",
-    borderTopLeftRadius: BORDER_RADIUS,
+    borderTopLeftRadius: theme.borderRadii.xl,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: BORDER_RADIUS,
+    height: theme.borderRadii.xl,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
     alignItems: "center",
-    borderBottomRightRadius: BORDER_RADIUS,
+    borderBottomRightRadius: theme.borderRadii.xl,
     overflow: "hidden",
   },
 });
