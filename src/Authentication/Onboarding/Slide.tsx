@@ -10,10 +10,9 @@ export const BORDER_RADIUS = 75;
 interface SlideProps {
   title: string;
   right?: boolean;
-  img: number;
 }
 
-const Slide = ({ title, right, img }: SlideProps) => {
+const Slide = ({ title, right }: SlideProps) => {
   const transform = [
     { translateY: (SLIDER_HEIGHT - 100) / 2 },
     { translateX: right ? width / 2 - 50 : -width / 2 + 50 },
@@ -22,9 +21,6 @@ const Slide = ({ title, right, img }: SlideProps) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.underlay}>
-        <Image source={img} style={styles.img} />
-      </View>
       <View style={[styles.titleContainer, { transform }]}>
         <Text variant="hero">{title}</Text>
       </View>
@@ -41,10 +37,6 @@ const styles = StyleSheet.create({
   titleContainer: {
     height: 100,
     justifyContent: "center",
-  },
-  underlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-end",
   },
   img: {
     ...StyleSheet.absoluteFillObject,

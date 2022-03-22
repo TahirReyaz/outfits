@@ -1,6 +1,11 @@
 import React, { useRef } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import Animated, { divide, multiply } from "react-native-reanimated";
+import { Dimensions, StyleSheet, View, Image } from "react-native";
+import Animated, {
+  divide,
+  Extrapolate,
+  interpolateNode,
+  multiply,
+} from "react-native-reanimated";
 import {
   useScrollHandler,
   interpolateColor,
@@ -19,7 +24,11 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find the best outfits here!",
     color: "#BFEAF5",
-    img: require("../../../assets/1.png"),
+    img: {
+      src: require("../../../assets/1.png"),
+      width: 401,
+      height: 623,
+    },
   },
   {
     title: "Playful",
@@ -27,7 +36,11 @@ const slides = [
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
     color: "#BEECC4",
-    img: require("../../../assets/2.png"),
+    img: {
+      src: require("../../../assets/2.png"),
+      width: 539,
+      height: 518,
+    },
   },
   {
     title: "Excentric",
@@ -35,14 +48,22 @@ const slides = [
     description:
       "Create your individual and unique style and look amazing everyday",
     color: "#FFE4D9",
-    img: require("../../../assets/3.png"),
+    img: {
+      src: require("../../../assets/3.png"),
+      width: 637,
+      height: 683,
+    },
   },
   {
     title: "Funky",
     subtitle: "Look Good, Feel Good",
     description: "Discover the trends in fashion and explore your personality",
     color: "#FFDDDD",
-    img: require("../../../assets/4.png"),
+    img: {
+      src: require("../../../assets/4.png"),
+      width: 448,
+      height: 656,
+    },
   },
 ];
 
@@ -56,6 +77,31 @@ const Onboarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, { backgroundColor }]}>
+        {/* Bg images */}
+        {slides.map(({ img }, index) => {
+          const opacity = interpolateNode(x, {
+            inputRange: [
+              (index - 0.5) * width,
+              index * width,
+              (index + 0.5) * width,
+            ],
+            outputRange: [0, 1, 0],
+            extrapolate: Extrapolate.CLAMP,
+          });
+
+          return (
+            <Animated.View style={[styles.underlay, { opacity }]} key={index}>
+              <Image
+                source={img.src}
+                style={{
+                  width: width - BORDER_RADIUS,
+                  height: ((width - BORDER_RADIUS) * img.height) / img.width,
+                }}
+              />
+            </Animated.View>
+          );
+        })}
+
         <Animated.ScrollView
           ref={scroll}
           horizontal
@@ -135,5 +181,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    borderBottomRightRadius: BORDER_RADIUS,
+    overflow: "hidden",
   },
 });
