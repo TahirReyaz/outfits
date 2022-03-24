@@ -27,7 +27,7 @@ const slides = [
       "Confused about your outfit? Don't worry! Find the best outfits here!",
     color: "#BFEAF5",
     img: {
-      src: require("../../../assets/1.png"),
+      src: require("../assets/1.png"),
       width: 401,
       height: 623,
     },
@@ -39,7 +39,7 @@ const slides = [
       "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
     color: "#BEECC4",
     img: {
-      src: require("../../../assets/2.png"),
+      src: require("../assets/2.png"),
       width: 539,
       height: 518,
     },
@@ -51,7 +51,7 @@ const slides = [
       "Create your individual and unique style and look amazing everyday",
     color: "#FFE4D9",
     img: {
-      src: require("../../../assets/3.png"),
+      src: require("../assets/3.png"),
       width: 637,
       height: 683,
     },
@@ -62,12 +62,13 @@ const slides = [
     description: "Discover the trends in fashion and explore your personality",
     color: "#FFDDDD",
     img: {
-      src: require("../../../assets/4.png"),
+      src: require("../assets/4.png"),
       width: 448,
       height: 656,
     },
   },
 ];
+export const assets = slides.map((slide) => slide.img.src);
 
 const Onboarding = ({
   navigation,

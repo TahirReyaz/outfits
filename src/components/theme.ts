@@ -1,10 +1,11 @@
-import { createText } from "@shopify/restyle";
+import { createBox, createText } from "@shopify/restyle";
 
 const theme = {
   colors: {
     primary: "#2CB9B0",
     white: "white",
     title: "#0C0D34",
+    button: "#0C0D34",
     text: "rgba(12, 13, 52, 0.7)",
     grey: "rgba(12, 13, 52, 0.05)",
   },
@@ -56,5 +57,5 @@ const theme = {
 
 export type Theme = typeof theme;
 export const Text = createText<Theme>();
-export const Box = createText<Theme>();
+export const Box = createBox<Theme>();
 export default theme;
