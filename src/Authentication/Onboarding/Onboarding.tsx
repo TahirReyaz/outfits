@@ -15,6 +15,7 @@ import Dot from "./Dot";
 import Slide, { SLIDER_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
 import { theme } from "../../components";
+import { Routes, StackNavigationProps } from "../../components/Navigation";
 
 const { width } = Dimensions.get("window");
 
@@ -68,7 +69,9 @@ const slides = [
   },
 ];
 
-const Onboarding = () => {
+const Onboarding = ({
+  navigation,
+}: StackNavigationProps<Routes, "Onboarding">) => {
   const scroll = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
@@ -136,21 +139,26 @@ const Onboarding = () => {
               transform: [{ translateX: multiply(x, -1) }],
             }}
           >
-            {slides.map(({ subtitle, description }, index) => (
-              <Subslide
-                key={index}
-                last={index === slides.length - 1}
-                {...{ subtitle, description }}
-                onPress={() => {
-                  if (scroll.current) {
-                    (scroll.current as any).scrollTo({
-                      x: width * (index + 1),
-                      animated: true,
-                    });
-                  }
-                }}
-              />
-            ))}
+            {slides.map(({ subtitle, description }, index) => {
+              const last = index === slides.length - 1;
+
+              return (
+                <Subslide
+                  key={index}
+                  {...{ subtitle, description, last }}
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate("Welcome");
+                    } else if (scroll.current) {
+                      (scroll.current as any).scrollTo({
+                        x: width * (index + 1),
+                        animated: true,
+                      });
+                    }
+                  }}
+                />
+              );
+            })}
           </Animated.View>
         </Animated.View>
       </View>
