@@ -3,6 +3,7 @@ import React from "react";
 
 import theme, { Box, Text } from "../../components/theme";
 import { Button } from "../../components";
+import { Routes, StackNavigationProps } from "../../components/Navigation";
 
 const { width } = Dimensions.get("window");
 const img = {
@@ -12,7 +13,7 @@ const img = {
 };
 export const assets = [img.src];
 
-const Welcome = () => {
+const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box
@@ -54,7 +55,9 @@ const Welcome = () => {
           <Button
             variant="primary"
             label="Have an account? Login"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
           />
           <Button label="Join us, it's Free" onPress={() => {}} />
           <Button
