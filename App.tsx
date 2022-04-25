@@ -5,7 +5,8 @@ import {
   assets as authenticationAssets,
   AuthenticationStackNavigator,
 } from "./src/Authentication";
-import { LoadAssets, theme } from "./src/components";
+import { LoadAssets } from "./src/components";
+import { theme } from "./src/components/Theme";
 
 const assets = [...authenticationAssets];
 const fonts = {

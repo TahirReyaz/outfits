@@ -6,7 +6,7 @@ import {
 import React from "react";
 import { Feather as Icon } from "@expo/vector-icons";
 
-import theme, { Box } from "../theme";
+import { Box, useTheme } from "../Theme";
 
 interface TextInputProps extends RNTextInputProps {
   icon: string;
@@ -14,11 +14,11 @@ interface TextInputProps extends RNTextInputProps {
   error?: string;
 }
 
-const SIZE = theme.borderRadii.m * 2;
-
 const TextInput = ({ icon, touched, error, ...props }: TextInputProps) => {
+  const theme = useTheme();
   const borderColor = !touched ? "text" : error ? "danger" : "primary";
   const iconColor = theme.colors[borderColor];
+  const SIZE = theme.borderRadii.m * 2;
 
   return (
     <Box

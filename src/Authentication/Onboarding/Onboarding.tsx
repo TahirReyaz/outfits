@@ -14,8 +14,9 @@ import Dot from "./Dot";
 
 import Slide, { SLIDER_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
-import { theme } from "../../components";
+import { useTheme } from "../../components";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
+import { Theme, makeStyles } from "../../components/Theme";
 
 const { width } = Dimensions.get("window");
 
@@ -73,6 +74,8 @@ export const assets = slides.map((slide) => slide.img.src);
 const Onboarding = ({
   navigation,
 }: StackNavigationProps<Routes, "Onboarding">) => {
+  const styles = useStyles();
+  const theme = useTheme();
   const scroll = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
@@ -169,7 +172,7 @@ const Onboarding = ({
 
 export default Onboarding;
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -200,4 +203,4 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.borderRadii.xl,
     overflow: "hidden",
   },
-});
+}));

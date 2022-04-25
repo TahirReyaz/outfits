@@ -10,7 +10,7 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-import { Box } from "./theme";
+import { Box, useTheme } from "./Theme";
 
 export const assets = [require("./assets/patterns/1.jpg")];
 const { width } = Dimensions.get("window");
@@ -24,6 +24,8 @@ interface ContainerProps {
 
 const Container = ({ children, footer }: ContainerProps) => {
   const insets = useSafeAreaInsets();
+  const theme = useTheme();
+
   return (
     <KeyboardAvoidingView style={{ height: Dimensions.get("screen").height }}>
       <Box flex={1} backgroundColor="secondary">

@@ -1,14 +1,15 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React, { ReactNode } from "react";
-import theme, { Box } from "../../components/theme";
-
-const SIZE = theme.borderRadii.l * 2;
+import { Box, useTheme } from "../../components/Theme";
 
 interface SocialIconProps {
   children: ReactNode;
 }
 
 const SocialIcon = ({ children }: SocialIconProps) => {
+  const theme = useTheme();
+  const SIZE = theme.borderRadii.l * 2;
+
   return (
     <Box
       marginHorizontal="m"

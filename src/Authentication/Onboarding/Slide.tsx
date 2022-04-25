@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, View, Image } from "react-native";
 import React from "react";
 
-import { Text, theme } from "../../components";
+import { Text, useTheme } from "../../components";
 
 const { width, height } = Dimensions.get("window");
 export const SLIDER_HEIGHT = height * 0.61;
@@ -12,6 +12,7 @@ interface SlideProps {
 }
 
 const Slide = ({ title, right }: SlideProps) => {
+  const theme = useTheme();
   const transform = [
     { translateY: (SLIDER_HEIGHT - 100) / 2 },
     { translateX: right ? width / 2 - 50 : -width / 2 + 50 },
@@ -36,11 +37,5 @@ const styles = StyleSheet.create({
   titleContainer: {
     height: 100,
     justifyContent: "center",
-  },
-  img: {
-    ...StyleSheet.absoluteFillObject,
-    width: undefined,
-    height: undefined,
-    borderBottomRightRadius: theme.borderRadii.xl,
   },
 });

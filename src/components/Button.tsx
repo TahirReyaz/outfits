@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import React, { ReactNode } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { useTheme } from "@shopify/restyle";
-import { Theme, Text } from "./theme";
+import { Theme, Text } from "./Theme";
 
 interface ButtonProps {
   label?: string;
