@@ -1,11 +1,9 @@
-import { StyleSheet } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { Button, Text, Container, Box } from "../components";
 import TextInput from "../components/Forms/TextInput";
-import Checkbox from "../components/Forms/Checkbox";
 import Footer from "./components/Footer";
 import { Routes, StackNavigationProps } from "../components/Navigation";
 
@@ -15,26 +13,21 @@ const SignUpSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required"),
   passwordConfirmation: Yup.string()
-    .min(6, "Too Short!")
-    .max(50, "Too Long!")
+    .equals([Yup.ref("password")], "Passwords don't match")
     .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
 const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    errors,
-    touched,
-    values,
-    setFieldValue,
-  } = useFormik({
-    validationSchema: SignUpSchema,
-    initialValues: { email: "", password: "", passwordConfirmation: "" },
-    onSubmit: (values) => console.log(values),
-  });
+  const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(
+    {
+      validationSchema: SignUpSchema,
+      initialValues: { email: "", password: "", passwordConfirmation: "" },
+      onSubmit: (values) => console.log(values),
+    }
+  );
+  const password = useRef<typeof TextInput>(null);
+  const passwordConfirmation = useRef<typeof TextInput>(null);
 
   const footer = (
     <Footer
@@ -62,23 +55,52 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
               onBlur={handleBlur("email")}
               error={errors.email}
               touched={touched.email}
+              autoCompleteType="email"
+              autoCapitalize="none"
+              returnKeyLabel="next"
+              returnKeyType="next"
+              onSubmitEditing={() => password.current?.focus()}
             />
           </Box>
-          <TextInput
-            icon="lock"
-            placeholder="Enter your Password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            error={errors.password}
-            touched={touched.password}
+          <Box marginBottom="m">
+            <TextInput
+              ref={password}
+              icon="lock"
+              placeholder="Enter your Password"
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              error={errors.password}
+              touched={touched.password}
+              autoCompleteType="password"
+              autoCapitalize="none"
+              returnKeyLabel="next"
+              returnKeyType="next"
+              secureTextEntry
+              onSubmitEditing={() => passwordConfirmation.current?.focus()}
+            />
+          </Box>
+        </Box>
+        <TextInput
+          ref={passwordConfirmation}
+          icon="lock"
+          placeholder="Confirm Password"
+          onChangeText={handleChange("passwordConfirmation")}
+          onBlur={handleBlur("passwordConfirmation")}
+          error={errors.passwordConfirmation}
+          touched={touched.passwordConfirmation}
+          autoCompleteType="password"
+          autoCapitalize="none"
+          returnKeyLabel="go"
+          returnKeyType="go"
+          secureTextEntry
+          onSubmitEditing={() => handleSubmit()}
+        />
+        <Box alignItems="center" marginTop="m">
+          <Button
+            variant="primary"
+            label="Create your account"
+            onPress={handleSubmit}
           />
-          <Box alignItems="center" marginTop="m">
-            <Button
-              variant="primary"
-              label="Create your account"
-              onPress={handleSubmit}
-            />
-          </Box>
         </Box>
       </Box>
     </Container>
@@ -86,5 +108,3 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
 };
 
 export default SignUp;
-
-const styles = StyleSheet.create({});

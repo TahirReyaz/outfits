@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -31,6 +30,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
     initialValues: { email: "", password: "", remember: false },
     onSubmit: (values) => console.log(values),
   });
+  const password = useRef<typeof TextInput>(null);
 
   const footer = (
     <Footer
@@ -58,15 +58,27 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
               onBlur={handleBlur("email")}
               error={errors.email}
               touched={touched.email}
+              autoCompleteType="email"
+              autoCapitalize="none"
+              returnKeyLabel="next"
+              returnKeyType="next"
+              onSubmitEditing={() => password.current?.focus()}
             />
           </Box>
           <TextInput
+            ref={password}
             icon="lock"
             placeholder="Enter your Password"
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
             error={errors.password}
             touched={touched.password}
+            autoCompleteType="password"
+            autoCapitalize="none"
+            returnKeyLabel="go"
+            returnKeyType="go"
+            secureTextEntry
+            onSubmitEditing={() => handleSubmit()}
           />
           <Box flexDirection="row" justifyContent="space-between">
             <Checkbox
@@ -92,5 +104,3 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
 };
 
 export default Login;
-
-const styles = StyleSheet.create({});
