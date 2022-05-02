@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Box } from "./Theme";
 
 export const assets = [require("./assets/patterns/1.jpg")];
-const { width } = Dimensions.get("window");
+const { width, height: wHeight } = Dimensions.get("window");
 const aspectRatio = 500 / 750;
 const height = width * aspectRatio;
 
@@ -19,43 +19,43 @@ const Container = ({ children, footer }: ContainerProps) => {
   const insets = useSafeAreaInsets();
 
   return (
-    <Box flex={1} backgroundColor="secondary">
-      <StatusBar barStyle="light-content" />
-      <Box backgroundColor="white">
-        <Box
-          borderBottomLeftRadius="xl"
-          overflow="hidden"
-          height={height * 0.61}
-        >
-          <Image source={assets[0]} style={{ width, height }} />
+    <KeyboardAwareScrollView>
+      <Box height={wHeight} backgroundColor="secondary">
+        <StatusBar barStyle="light-content" />
+        <Box backgroundColor="white">
+          <Box
+            borderBottomLeftRadius="xl"
+            overflow="hidden"
+            height={height * 0.61}
+          >
+            <Image source={assets[0]} style={{ width, height }} />
+          </Box>
         </Box>
-      </Box>
-      <Box flex={1} overflow="hidden" borderBottomLeftRadius="xl">
-        <Image
-          source={assets[0]}
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            width,
-            height,
-            top: -height * 0.61,
-          }}
-        />
-        <Box
-          borderRadius="xl"
-          borderTopLeftRadius={0}
-          backgroundColor="white"
-          flex={1}
-        >
-          <KeyboardAwareScrollView enableOnAndroid={true}>
+        <Box flex={1} overflow="hidden" borderBottomLeftRadius="xl">
+          <Image
+            source={assets[0]}
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              width,
+              height,
+              top: -height * 0.61,
+            }}
+          />
+          <Box
+            borderRadius="xl"
+            borderTopLeftRadius={0}
+            backgroundColor="white"
+            flex={1}
+          >
             {children}
-          </KeyboardAwareScrollView>
+          </Box>
+        </Box>
+        <Box backgroundColor="secondary" paddingVertical="m">
+          {footer}
+          <Box height={insets.bottom} />
         </Box>
       </Box>
-      <Box backgroundColor="secondary" paddingVertical="m">
-        {footer}
-        <Box height={insets.bottom} />
-      </Box>
-    </Box>
+    </KeyboardAwareScrollView>
   );
 };
 
