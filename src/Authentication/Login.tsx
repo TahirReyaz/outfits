@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { TextInput as RNTextInput } from "react-native";
 
 import { Button, Text, Container, Box } from "../components";
 import TextInput from "../components/Forms/TextInput";
@@ -30,7 +31,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
     initialValues: { email: "", password: "", remember: false },
     onSubmit: (values) => console.log(values),
   });
-  const password = useRef<typeof TextInput>(null);
+  const password = useRef<RNTextInput>(null);
 
   const footer = (
     <Footer
