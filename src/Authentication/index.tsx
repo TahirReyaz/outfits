@@ -9,7 +9,7 @@ import Onboarding, { assets as onboardingAssests } from "./Onboarding";
 import Welcome, { assets as welcomeAssets } from "./Welcome";
 
 export { default as Onboarding } from "./Onboarding";
-export { default as Welcome } from "./Welcome";
+// export { default as Welcome } from "./Welcome";
 export const assets = [...onboardingAssests, ...welcomeAssets];
 
 const AuthenticationStack = createStackNavigator<Routes>();
