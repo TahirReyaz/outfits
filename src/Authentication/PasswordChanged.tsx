@@ -12,6 +12,7 @@ const PasswordChanged = ({
 }: StackNavigationProps<Routes, "PasswordChanged">) => {
   return (
     <Container
+      pattern={0}
       footer={
         <Box flexDirection="row" justifyContent="center" paddingBottom="m">
           <CloseButton onPress={() => navigation.navigate("Login")} />
@@ -24,6 +25,7 @@ const PasswordChanged = ({
           justifyContent="center"
           alignItems="center"
           style={{ width: SIZE, height: SIZE, borderRadius: SIZE / 2 }}
+          marginBottom="m"
         >
           <Text color="primary" textAlign="center">
             <Icon size={32} name="check" style={{ textAlign: "center" }} />

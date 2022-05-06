@@ -42,7 +42,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
   );
 
   return (
-    <Container footer={footer}>
+    <Container pattern={0} footer={footer}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="l">
           Welcome Back
