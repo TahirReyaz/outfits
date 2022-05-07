@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Text, useTheme } from "../components/Theme";
 import { Button } from "../components";
 import { Routes, StackNavigationProps } from "../components/Navigation";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 const img = {
@@ -61,12 +62,18 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
               navigation.navigate("Login");
             }}
           />
-          <Button label="Join us, it's Free" onPress={() => {}} />
           <Button
-            variant="transparent"
-            label="Forgot Password?"
-            onPress={() => {}}
+            label="Join us, it's Free"
+            onPress={() => navigation.navigate("SignUp")}
           />
+          <BorderlessButton
+            onPress={() => navigation.navigate("ForgotPassword")}
+            rippleColor="transparent"
+          >
+            <Text variant="button" color="text">
+              Forgot Password?
+            </Text>
+          </BorderlessButton>
         </Box>
       </Box>
     </Box>
