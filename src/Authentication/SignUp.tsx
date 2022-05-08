@@ -45,69 +45,67 @@ const SignUp = ({
 
   return (
     <Container pattern={1} footer={footer}>
-      <Box padding="xl">
-        <Text variant="title1" textAlign="center" marginBottom="l">
-          Create account
-        </Text>
-        <Text variant="body" textAlign="center" marginBottom="l">
-          Let us know what's your name, email and password
-        </Text>
-        <Box>
-          <Box marginBottom="m">
-            <TextInput
-              icon="mail"
-              placeholder="Enter your Email"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              error={errors.email}
-              touched={touched.email}
-              autoCompleteType="email"
-              autoCapitalize="none"
-              returnKeyLabel="next"
-              returnKeyType="next"
-              onSubmitEditing={() => password.current?.focus()}
-            />
-          </Box>
-          <Box marginBottom="m">
-            <TextInput
-              ref={password}
-              icon="lock"
-              placeholder="Enter your Password"
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              error={errors.password}
-              touched={touched.password}
-              autoCompleteType="password"
-              autoCapitalize="none"
-              returnKeyLabel="next"
-              returnKeyType="next"
-              secureTextEntry
-              onSubmitEditing={() => passwordConfirmation.current?.focus()}
-            />
-          </Box>
-        </Box>
-        <TextInput
-          ref={passwordConfirmation}
-          icon="lock"
-          placeholder="Confirm Password"
-          onChangeText={handleChange("passwordConfirmation")}
-          onBlur={handleBlur("passwordConfirmation")}
-          error={errors.passwordConfirmation}
-          touched={touched.passwordConfirmation}
-          autoCompleteType="password"
-          autoCapitalize="none"
-          returnKeyLabel="go"
-          returnKeyType="go"
-          secureTextEntry
-          onSubmitEditing={() => handleSubmit()}
-        />
-        <Box alignItems="center" marginTop="m">
-          <Button
-            variant="primary"
-            label="Create your account"
-            onPress={handleSubmit}
+      <Text variant="title1" textAlign="center" marginBottom="l">
+        Create account
+      </Text>
+      <Text variant="body" textAlign="center" marginBottom="l">
+        Let us know what's your name, email and password
+      </Text>
+      <Box>
+        <Box marginBottom="m">
+          <TextInput
+            icon="mail"
+            placeholder="Enter your Email"
+            onChangeText={handleChange("email")}
+            onBlur={handleBlur("email")}
+            error={errors.email}
+            touched={touched.email}
+            autoCompleteType="email"
+            autoCapitalize="none"
+            returnKeyLabel="next"
+            returnKeyType="next"
+            onSubmitEditing={() => password.current?.focus()}
           />
         </Box>
+        <Box marginBottom="m">
+          <TextInput
+            ref={password}
+            icon="lock"
+            placeholder="Enter your Password"
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+            error={errors.password}
+            touched={touched.password}
+            autoCompleteType="password"
+            autoCapitalize="none"
+            returnKeyLabel="next"
+            returnKeyType="next"
+            secureTextEntry
+            onSubmitEditing={() => passwordConfirmation.current?.focus()}
+          />
+        </Box>
+      </Box>
+      <TextInput
+        ref={passwordConfirmation}
+        icon="lock"
+        placeholder="Confirm Password"
+        onChangeText={handleChange("passwordConfirmation")}
+        onBlur={handleBlur("passwordConfirmation")}
+        error={errors.passwordConfirmation}
+        touched={touched.passwordConfirmation}
+        autoCompleteType="password"
+        autoCapitalize="none"
+        returnKeyLabel="go"
+        returnKeyType="go"
+        secureTextEntry
+        onSubmitEditing={() => handleSubmit()}
+      />
+      <Box alignItems="center" marginTop="m">
+        <Button
+          variant="primary"
+          label="Create your account"
+          onPress={handleSubmit}
+        />
       </Box>
     </Container>
   );

@@ -54,71 +54,69 @@ const Login = ({ navigation }: LoginProps) => {
 
   return (
     <Container pattern={0} footer={footer}>
-      <Box padding="xl">
-        <Text variant="title1" textAlign="center" marginBottom="l">
-          Welcome Back
-        </Text>
-        <Text variant="body" textAlign="center" marginBottom="l">
-          Use your credentials below and login to your account
-        </Text>
-        <Box>
-          <Box marginBottom="m">
-            <TextInput
-              icon="mail"
-              placeholder="Enter your Email"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              error={errors.email}
-              touched={touched.email}
-              autoCompleteType="email"
-              autoCapitalize="none"
-              returnKeyLabel="next"
-              returnKeyType="next"
-              onSubmitEditing={() => password.current?.focus()}
-            />
-          </Box>
+      <Text variant="title1" textAlign="center" marginBottom="l">
+        Welcome Back
+      </Text>
+      <Text variant="body" textAlign="center" marginBottom="l">
+        Use your credentials below and login to your account
+      </Text>
+      <Box>
+        <Box marginBottom="m">
           <TextInput
-            ref={password}
-            icon="lock"
-            placeholder="Enter your Password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            error={errors.password}
-            touched={touched.password}
-            autoCompleteType="password"
+            icon="mail"
+            placeholder="Enter your Email"
+            onChangeText={handleChange("email")}
+            onBlur={handleBlur("email")}
+            error={errors.email}
+            touched={touched.email}
+            autoCompleteType="email"
             autoCapitalize="none"
-            returnKeyLabel="go"
-            returnKeyType="go"
-            secureTextEntry
-            onSubmitEditing={() => handleSubmit()}
+            returnKeyLabel="next"
+            returnKeyType="next"
+            onSubmitEditing={() => password.current?.focus()}
           />
-          <Box
-            flexDirection="row"
-            justifyContent="space-between"
-            marginVertical="s"
-            alignItems="center"
+        </Box>
+        <TextInput
+          ref={password}
+          icon="lock"
+          placeholder="Enter your Password"
+          onChangeText={handleChange("password")}
+          onBlur={handleBlur("password")}
+          error={errors.password}
+          touched={touched.password}
+          autoCompleteType="password"
+          autoCapitalize="none"
+          returnKeyLabel="go"
+          returnKeyType="go"
+          secureTextEntry
+          onSubmitEditing={() => handleSubmit()}
+        />
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          marginVertical="s"
+          alignItems="center"
+        >
+          <Checkbox
+            label="Remeber me"
+            checked={values.remember}
+            onChange={() => setFieldValue("remember", !values.remember)}
+          />
+          <BorderlessButton
+            onPress={() => navigation.navigate("ForgotPassword")}
+            rippleColor="transparent"
           >
-            <Checkbox
-              label="Remeber me"
-              checked={values.remember}
-              onChange={() => setFieldValue("remember", !values.remember)}
-            />
-            <BorderlessButton
-              onPress={() => navigation.navigate("ForgotPassword")}
-              rippleColor="transparent"
-            >
-              <Text variant="button" color="primary">
-                Forgot Password?
-              </Text>
-            </BorderlessButton>
-          </Box>
-          <Box alignItems="center" marginTop="m">
-            <Button
-              variant="primary"
-              label="Log into your account"
-              onPress={handleSubmit}
-            />
-          </Box>
+            <Text variant="button" color="primary">
+              Forgot Password?
+            </Text>
+          </BorderlessButton>
+        </Box>
+        <Box alignItems="center" marginTop="m">
+          <Button
+            variant="primary"
+            label="Log into your account"
+            onPress={handleSubmit}
+          />
         </Box>
       </Box>
     </Container>
