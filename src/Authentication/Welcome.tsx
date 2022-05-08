@@ -3,7 +3,10 @@ import React from "react";
 
 import { Box, Text, useTheme } from "../components/Theme";
 import { Button } from "../components";
-import { Routes, StackNavigationProps } from "../components/Navigation";
+import {
+  AuthenticationRoutes,
+  StackNavigationProps,
+} from "../components/Navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
@@ -14,7 +17,9 @@ const img = {
 };
 export const assets = [img.src];
 
-const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
+const Welcome = ({
+  navigation,
+}: StackNavigationProps<AuthenticationRoutes, "Welcome">) => {
   const theme = useTheme();
 
   return (
