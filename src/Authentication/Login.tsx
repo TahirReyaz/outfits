@@ -7,18 +7,8 @@ import { Button, Text, Container, Box } from "../components";
 import TextInput from "../components/Forms/TextInput";
 import Checkbox from "../components/Forms/Checkbox";
 import Footer from "./components/Footer";
-import { AuthenticationRoutes, HomeRoutes } from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { CompositeNavigationProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-
-interface LoginProps {
-  navigation: CompositeNavigationProp<
-    StackNavigationProp<AuthenticationRoutes, "Login">,
-    DrawerNavigationProp<HomeRoutes, "OutfitIdeas">
-  >;
-}
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
@@ -28,7 +18,7 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const Login = ({ navigation }: LoginProps) => {
+const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
   const {
     handleChange,
     handleBlur,
