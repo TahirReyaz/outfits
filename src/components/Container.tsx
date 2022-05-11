@@ -54,11 +54,11 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
           />
           <Box
             borderRadius="xl"
-            borderTopLeftRadius={0}
             backgroundColor="white"
             flex={1}
             padding="xl"
             justifyContent="center"
+            style={{ borderTopLeftRadius: 0 }}
           >
             {children}
           </Box>

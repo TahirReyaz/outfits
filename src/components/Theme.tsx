@@ -14,6 +14,11 @@ export const theme = {
     text: "rgba(12, 13, 52, 0.7)",
     grey: "#F4F0E5",
     primaryLight: "#E7F9F7",
+
+    orange: "#FE5E33",
+    pink: "#FF84A2",
+    yellow: "#FFC641",
+    violet: "#442CB9",
   },
   spacing: {
     s: 8,
