@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box, useTheme, Text, RoundedIconButton } from "../../components";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 
+export const assets = [require("./assets/drawer.png")];
 const { width } = Dimensions.get("window");
 export const DRAWER_WIDTH = width * 0.8;
 const aspectRatio = 500 / 750;
@@ -87,7 +88,7 @@ const Drawer = () => {
       </Box>
       <Box flex={0.8}>
         <Box flex={1} backgroundColor="secondary" />
-        <Box flex={1} backgroundColor="primary" />
+        <Box flex={1} backgroundColor="secondary" />
         <Box
           position="absolute"
           top={0}
@@ -122,13 +123,18 @@ const Drawer = () => {
           ))}
         </Box>
       </Box>
-      <Box flex={0.2} backgroundColor="white">
+      <Box
+        backgroundColor="white"
+        width={DRAWER_WIDTH}
+        overflow="hidden"
+        height={height * 0.61}
+      >
         <Image
-          source={require("../../components/assets/patterns/1.jpg")}
+          source={assets[0]}
           style={{
-            ...StyleSheet.absoluteFillObject,
-            width: undefined,
-            height: undefined,
+            height,
+            width: DRAWER_WIDTH,
+            borderTopLeftRadius: theme.borderRadii.xl,
           }}
         />
       </Box>
