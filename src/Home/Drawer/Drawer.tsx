@@ -1,8 +1,7 @@
 import React from "react";
-import { Dimensions, Image, StyleSheet } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Dimensions, Image } from "react-native";
 
-import { Box, useTheme, Text, RoundedIconButton } from "../../components";
+import { Box, useTheme, Text, Header } from "../../components";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 
 export const assets = [require("./assets/drawer.png")];
@@ -51,7 +50,6 @@ const items: DrawerItemProps[] = [
 
 const Drawer = () => {
   const theme = useTheme();
-  const insets = useSafeAreaInsets();
 
   return (
     <Box flex={1}>
@@ -64,25 +62,11 @@ const Drawer = () => {
           left={0}
           borderBottomRightRadius="xl"
           backgroundColor="secondary"
-          flexDirection="row"
-          style={{ paddingTop: insets.top }}
-          justifyContent="space-between"
-          paddingHorizontal="m"
         >
-          <RoundedIconButton
-            name="x"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
-            size={24}
-          />
-          <Text color="white">MY PROFILE</Text>
-          <RoundedIconButton
-            name="shopping-bag"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => {}}
-            size={24}
+          <Header
+            title="my profile"
+            left={{ icon: "x", onPress: () => {} }}
+            right={{ icon: "shopping-bag", onPress: () => {} }}
           />
         </Box>
       </Box>
