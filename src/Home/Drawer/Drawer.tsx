@@ -1,3 +1,4 @@
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Dimensions, Image } from "react-native";
 
@@ -49,6 +50,7 @@ const items: DrawerItemProps[] = [
 ];
 
 const Drawer = () => {
+  const navigation = useNavigation();
   const theme = useTheme();
 
   return (
@@ -65,8 +67,14 @@ const Drawer = () => {
         >
           <Header
             title="menu"
-            left={{ icon: "x", onPress: () => {} }}
-            right={{ icon: "shopping-bag", onPress: () => {} }}
+            left={{
+              icon: "x",
+              onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
+            }}
+            right={{
+              icon: "shopping-bag",
+              onPress: () => {},
+            }}
             dark={true}
           />
         </Box>
