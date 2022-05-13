@@ -12,7 +12,8 @@ export const theme = {
     danger: "#FF0058",
     white: "white",
     text: "rgba(12, 13, 52, 0.7)",
-    grey: "#F4F0E5",
+    grey: "#F4F0EF",
+    lightGrey: "#FAFAFA",
     primaryLight: "#E7F9F7",
 
     orange: "#FE5E33",

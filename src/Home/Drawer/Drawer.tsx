@@ -64,9 +64,10 @@ const Drawer = () => {
           backgroundColor="secondary"
         >
           <Header
-            title="my profile"
+            title="menu"
             left={{ icon: "x", onPress: () => {} }}
             right={{ icon: "shopping-bag", onPress: () => {} }}
+            dark={true}
           />
         </Box>
       </Box>
