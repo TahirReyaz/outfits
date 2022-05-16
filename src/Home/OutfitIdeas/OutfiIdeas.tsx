@@ -6,6 +6,7 @@ import { Box, Header } from "../../components";
 import { HomeNavigationProps } from "../../components/Navigation";
 import Background from "./Background";
 import Card from "./Card";
+import Categories from "./Categories";
 
 const cards = [
   { index: 3, source: require("../../Authentication/assets/4.png") },
@@ -25,6 +26,7 @@ const OutfiIdeas = ({ navigation }: HomeNavigationProps<"OutfitIdeas">) => {
         left={{ icon: "menu", onPress: () => navigation.openDrawer() }}
         right={{ icon: "shopping-bag", onPress: () => {} }}
       />
+      <Categories />
       <Box flex={1}>
         <Background />
         {cards.map(
