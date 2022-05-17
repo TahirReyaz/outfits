@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { HomeRoutes } from "../components/Navigation";
 import OutfitIdeas from "./OutfitIdeas";
+import FavouriteOutfits from "./FavouriteOutfits";
 
 import DrawerContent, { DRAWER_WIDTH } from "./Drawer";
 export { assets } from "./Drawer";
@@ -17,5 +18,6 @@ export const HomeNavigator = () => (
     }}
   >
     <Drawer.Screen name="OutfitIdeas" component={OutfitIdeas} />
+    <Drawer.Screen name="FavouriteOutfits" component={FavouriteOutfits} />
   </Drawer.Navigator>
 );
