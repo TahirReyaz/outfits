@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
-
-import { Box, Header, useTheme } from "../../components";
-import { HomeNavigationProps } from "../../components/Navigation";
-import Footer from "./Footer";
-import { ScrollView } from "react-native-gesture-handler";
-import Outfit from "./Outfit";
 import { Dimensions } from "react-native";
 import {
   Transition,
   Transitioning,
   TransitioningView,
 } from "react-native-reanimated";
+import { ScrollView } from "react-native-gesture-handler";
+
+import { Box, Header, useTheme } from "../../components";
+import { HomeNavigationProps } from "../../components/Navigation";
+import Footer from "./Footer";
+import Outfit from "./Outfit";
 
 const { width: wWidth } = Dimensions.get("window");
 
@@ -68,9 +68,12 @@ const defaultOutfits = [
 const FavouriteOutfits = ({
   navigation,
 }: HomeNavigationProps<"FavouriteOutfits">) => {
-  const transition = <Transition.Change interpolation="easeInOut" />;
-  const left = useRef<TransitioningView>(null);
-  const right = useRef<TransitioningView>(null);
+  const transition = (
+    <Transition.Together>
+      <Transition.Change interpolation="easeInOut" durationMs={1000} />
+    </Transition.Together>
+  );
+  const list = useRef<TransitioningView>(null);
   const theme = useTheme();
   const width = (wWidth - theme.spacing.m * 3) / 2;
   const [footerHeight, setFooterHeight] = useState(0);
@@ -89,24 +92,24 @@ const FavouriteOutfits = ({
             paddingBottom: footerHeight,
           }}
         >
-          <Box flexDirection="row">
-            <Box marginRight="m">
-              <Transitioning.View ref={left} {...{ transition }}>
+          <Transitioning.View ref={list} {...{ transition }}>
+            <Box flexDirection="row">
+              <Box marginRight="m">
                 {outfits
-                  .filter((_, i) => i % 2 !== 0)
+                  .filter(({ id }) => id % 2 !== 0)
                   .map((outfit) => (
                     <Outfit key={outfit.id} {...{ outfit, width }} />
                   ))}
-              </Transitioning.View>
+              </Box>
+              <Box>
+                {outfits
+                  .filter(({ id }) => id % 2 === 0)
+                  .map((outfit) => (
+                    <Outfit key={outfit.id} {...{ outfit, width }} />
+                  ))}
+              </Box>
             </Box>
-            <Box>
-              {outfits
-                .filter((_, i) => i % 2 === 0)
-                .map((outfit) => (
-                  <Outfit key={outfit.id} {...{ outfit, width }} />
-                ))}
-            </Box>
-          </Box>
+          </Transitioning.View>
         </ScrollView>
         <Box
           position="absolute"
@@ -121,9 +124,10 @@ const FavouriteOutfits = ({
         >
           <Footer
             label="Add to Favourites"
-            onPress={() =>
-              setOutfits(outfits.filter((outfit) => !outfit.selected))
-            }
+            onPress={() => {
+              setOutfits(outfits.filter((outfit) => !outfit.selected));
+              list.current?.animateNextTransition();
+            }}
           />
         </Box>
       </Box>
