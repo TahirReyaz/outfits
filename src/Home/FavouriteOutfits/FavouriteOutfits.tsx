@@ -11,6 +11,7 @@ import { Box, Header, useTheme } from "../../components";
 import { HomeNavigationProps } from "../../components/Navigation";
 import Footer from "./Footer";
 import Outfit from "./Outfit";
+import TopCurve from "./TopCurve";
 
 const { width: wWidth } = Dimensions.get("window");
 
@@ -111,6 +112,7 @@ const FavouriteOutfits = ({
             </Box>
           </Transitioning.View>
         </ScrollView>
+        <TopCurve {...{ footerHeight }} />
         <Box
           position="absolute"
           bottom={0}
