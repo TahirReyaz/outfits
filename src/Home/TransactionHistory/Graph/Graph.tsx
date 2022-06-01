@@ -3,44 +3,45 @@ import React from "react";
 
 import { Box, useTheme } from "../../../components";
 import { Theme } from "../../../components/Theme";
-import Underlay from "./Underlay";
+import Underlay, { MARGIN } from "./Underlay";
+import { lerp } from "./Scale";
 
 const { width: wWidth } = Dimensions.get("window");
 const aspectRatio = 195 / 305; // This number came from figma design
-
-const lert = (v0: number, v1: number, t: number) => (1 - t) * v0 + t * v1;
 
 export interface DataPoint {
   date: number;
   value: number;
   color: keyof Theme["colors"];
+  id: number;
 }
 interface GraphProps {
   data: DataPoint[];
+  minDate: number;
+  maxDate: number;
 }
 
-const Graph = ({ data }: GraphProps) => {
+const Graph = ({ data, minDate, maxDate }: GraphProps) => {
+  const numOfMonths = new Date(maxDate - minDate).getMonth();
   const theme = useTheme();
   const canvasWidth = wWidth - theme.spacing.m * 2;
   const canvasHeight = canvasWidth * aspectRatio;
-  const width = canvasWidth - theme.spacing.l;
-  const height = canvasHeight - theme.spacing.l;
-  const step = canvasWidth / data.length;
+  const width = canvasWidth - theme.spacing[MARGIN];
+  const height = canvasHeight - theme.spacing[MARGIN];
+  const step = width / numOfMonths;
   const values = data.map((p) => p.value);
   const dates = data.map((p) => p.date);
-  const minX = Math.min(...dates);
-  const maxX = Math.max(...dates);
   const minY = Math.min(...values);
   const maxY = Math.max(...values);
 
   return (
-    <Box marginTop="xl" paddingBottom="l" paddingLeft="l">
-      <Underlay {...{ minY, maxY, dates, step }} />
+    <Box marginTop="xl" paddingBottom={MARGIN} paddingLeft={MARGIN}>
+      <Underlay
+        {...{ minY, maxY, dates, step, minX: minDate, maxX: maxDate }}
+      />
       <Box width={width} height={height} marginTop="xl">
-        {data.map((point, i) => {
-          if (point.value === 0) {
-            return null;
-          }
+        {data.map((point) => {
+          const i = new Date(point.date - minDate).getMonth();
           return (
             <Box
               key={i}
@@ -48,7 +49,7 @@ const Graph = ({ data }: GraphProps) => {
               left={step * i}
               bottom={0}
               width={step}
-              height={lert(0, height, point.value / maxY)}
+              height={lerp(0, height, point.value / maxY)}
             >
               <Box
                 position="absolute"
